@@ -5,7 +5,7 @@ on:
     tags:
       - 'v*'
     branches:
-      - master  # Run when code is pushed to the main branch
+      - master
   pull_request:
     branches:
       - master
@@ -18,14 +18,19 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ['3.8', '3.9', '3.10', '3.11']
-        architecture: ['x64', 'x86']
-        exclude:
-          - os: macos-latest
+        architecture: ['x64']
+        include:
+          - os: windows-latest
             architecture: x86
           - os: ubuntu-latest
             architecture: x86
     steps:
       - uses: actions/checkout@v4
+      - name: Debug matrix variables
+        run: |
+          echo "OS: ${{ matrix.os }}"
+          echo "Python Version: ${{ matrix.python-version }}"
+          echo "Architecture: ${{ matrix.architecture }}"
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
@@ -34,7 +39,7 @@ jobs:
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
-          target: ${{ matrix.architecture == 'x64' && 'x86_64' || 'i686' }}
+          target: ${{ matrix.os == 'macos-latest' && 'x86_64' || matrix.architecture == 'x64' && 'x86_64' || 'i686' }}
           args: --release --out dist --interpreter ${{ matrix.python-version }}
           manylinux: 2014
       - name: Upload wheels
