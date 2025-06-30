@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ['3.8', '3.9', '3.10', '3.11']
+        python-version: ['3.9', '3.10', '3.11']
         architecture: ['x64']
         include:
           - os: windows-latest
@@ -26,16 +26,23 @@ jobs:
             architecture: x86
     steps:
       - uses: actions/checkout@v4
-      - name: Install gettext on macOS
+      - name: Install and verify gettext on macOS
         if: matrix.os == 'macos-latest'
         run: |
-          brew install gettext
+          brew install homebrew/core/gettext
           brew link gettext --force
-      - name: Check for libintl.8.dylib
+          ls -l /usr/local/opt/gettext/lib/libintl.8.dylib || echo "libintl.8.dylib not found"
+          echo "DYLD_LIBRARY_PATH=/usr/local/opt/gettext/lib:$DYLD_LIBRARY_PATH" >> $GITHUB_ENV
+      - name: Install Python on macOS
         if: matrix.os == 'macos-latest'
         run: |
-          ls -l /usr/local/opt/gettext/lib/libintl.8.dylib || echo "libintl.8.dylib not found"
-      - uses: actions/setup-python@v5
+          brew install python@${{ matrix.python-version }}
+          echo "PATH=/usr/local/opt/python@${{ matrix.python-version }}/bin:$PATH" >> $GITHUB_PATH
+          python3 --version
+          pip3 --version
+      - name: Setup Python on non-macOS
+        if: matrix.os != 'macos-latest'
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           architecture: ${{ matrix.architecture }}
