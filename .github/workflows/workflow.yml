@@ -26,11 +26,15 @@ jobs:
             architecture: x86
     steps:
       - uses: actions/checkout@v4
-      - name: Debug matrix variables
+      - name: Install gettext on macOS
+        if: matrix.os == 'macos-latest'
         run: |
-          echo "OS: ${{ matrix.os }}"
-          echo "Python Version: ${{ matrix.python-version }}"
-          echo "Architecture: ${{ matrix.architecture }}"
+          brew install gettext
+          brew link gettext --force
+      - name: Check for libintl.8.dylib
+        if: matrix.os == 'macos-latest'
+        run: |
+          ls -l /usr/local/opt/gettext/lib/libintl.8.dylib || echo "libintl.8.dylib not found"
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
