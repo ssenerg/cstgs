@@ -16,12 +16,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest]
         python-version: ['3.9', '3.10', '3.11']
         architecture: ['x64']
         include:
-          - os: windows-latest
-            architecture: x86
           - os: ubuntu-latest
             architecture: x86
     steps:
@@ -50,7 +48,7 @@ jobs:
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
-          target: ${{ matrix.os == 'macos-latest' && 'x86_64' || matrix.architecture == 'x64' && 'x86_64' || 'i686' }}
+          target: ${{ matrix.architecture == 'x64' && 'x86_64' || 'i686' }}
           args: --release --out dist --interpreter ${{ matrix.python-version }}
           manylinux: 2014
       - name: Upload wheels
