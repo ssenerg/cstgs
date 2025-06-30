@@ -5,12 +5,44 @@ use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{self, BufRead, BufReader, ErrorKind};
 
+/// A Python module implemented in Rust for counting triangles in a graph.
+///
+/// The reference of implementation is: https://www.vldb.org/pvldb/vol6/p1870-aduri.pdf
+/// 
+/// This module provides efficient parallel processing for triangle counting
+/// in large graphs using sampling techniques. For more details, see the
+/// documentation in the `README.md` files included
+/// in the package distribution.
 #[pymodule]
 fn cstgs(_py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(number_of_triangles, m)?)?;
     Ok(())
 }
 
+// Computes the number of triangles in a graph using sampling techniques.
+///
+/// This function reads edge data from a file and processes it in parallel
+/// to estimate the number of triangles, applying corrections based on
+/// sampling probabilities.
+///
+/// # Arguments
+/// * `addr` - Path to the file containing edge data (e.g., a CSV or edge list).
+/// * `processors` - Number of processors to use for parallel processing (must be > 0).
+/// * `edge_sampling_prob` - Probability of sampling an edge (0.0 to 1.0).
+/// * `wedge_sampling_prob` - Probability of sampling a wedge (0.0 to 1.0).
+///
+/// # Returns
+/// int: The estimated number of triangles in the graph, adjusted for sampling probabilities.
+///
+/// # Errors
+/// Returns an `Error` if the edge file cannot be read or processed.
+///
+/// # Example
+/// ```python
+/// import cstgs
+/// triangles = cstgs.number_of_triangles("edges.txt", 12, 0.568, 0.8)
+/// print(f"Estimated triangles: {triangles}")
+/// ```
 #[pyfunction]
 pub fn number_of_triangles(
     addr: String,
