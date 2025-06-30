@@ -24,6 +24,12 @@ jobs:
             architecture: x86
           - os: ubuntu-latest
             architecture: x86
+          - os: macos-latest
+            architecture: arm64
+        exclude:
+          - os: windows-latest
+            python-version: '3.11'
+            architecture: x86 # Exclude if Python 3.11 does not support 32-bit
     steps:
       - uses: actions/checkout@v4
       - name: Install and verify gettext on macOS
@@ -46,11 +52,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           architecture: ${{ matrix.architecture }}
+      - name: Verify Python architecture
+        run: |
+          python -c "import platform; assert platform.architecture()[0] == '${{ matrix.architecture == 'x64' && '64bit' || '32bit' }}', 'Python architecture mismatch'"
       - uses: dtolnay/rust-toolchain@stable
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
-          target: ${{ matrix.os == 'macos-latest' && 'x86_64' || matrix.architecture == 'x64' && 'x86_64' || 'i686' }}
+          target: ${{ matrix.architecture == 'x64' && 'x86_64' || matrix.architecture == 'x86' && 'i686' || matrix.architecture == 'arm64' && 'aarch64-apple-darwin' }}
           args: --release --out dist --interpreter ${{ matrix.python-version }}
           manylinux: 2014
       - name: Upload wheels
@@ -72,4 +81,4 @@ jobs:
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: |
           pip install maturin
-          find dist -name '*.whl' -exec maturin publish --skip-existing -u __token__ -p $PYPI_TOKEN --no-sdist {} \;
+          find dist -name '*.whl' -exec maturin publish --skip-existing -u __token__ -p $PYPI_TOKEN --no-sdst {} \;
