@@ -5,10 +5,10 @@ on:
     tags:
       - 'v*'
     branches:
-      - main  # Run when code is pushed to the main branch
+      - master  # Run when code is pushed to the main branch
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   build_wheels:
