@@ -56,7 +56,7 @@ jobs:
       - name: Upload wheels
         uses: actions/upload-artifact@v4
         with:
-          name: wheels-${{ matrix.os }}-${{ matrix.architecture }}
+          name: wheels-${{ matrix.os }}-${{ matrix.architecture }}-py${{ matrix.python-version }}
           path: dist
 
   publish:
@@ -66,9 +66,10 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: dist
+          pattern: wheels-*
       - name: Publish to PyPI
         env:
           PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: |
           pip install maturin
-          maturin publish --skip-existing -u __token__ -p $PYPI_TOKEN --no-sdist
+          find dist -name '*.whl' -exec maturin publish --skip-existing -u __token__ -p $PYPI_TOKEN --no-sdist {} \;
