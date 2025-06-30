@@ -4,6 +4,11 @@ on:
   push:
     tags:
       - 'v*'
+    branches:
+      - main  # Run when code is pushed to the main branch
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build_wheels:
