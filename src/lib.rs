@@ -5,7 +5,6 @@ use std::collections::{HashMap, HashSet};
 use std::fs::File;
 use std::io::{self, BufRead, BufReader, ErrorKind};
 
-
 #[pymodule]
 fn cstgs(_py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(number_of_triangles, m)?)?;
