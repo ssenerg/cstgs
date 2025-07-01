@@ -14,9 +14,6 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ['3.9', '3.10', '3.11']
         architecture: ['x64']
-        exclude:
-          - os: ubuntu-latest
-            architecture: x86  # Remove x86 unless explicitly needed
     steps:
       - uses: actions/checkout@v4
       - name: Install and verify gettext on macOS
@@ -52,7 +49,7 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.architecture == 'x64' && 'x86_64' || 'i686' }}
-          args: --release --out dist --interpreter ${{ matrix.python-version }} --compatibility pypi
+          args: --release --out dist --interpreter ${{ matrix.python-version }}
           manylinux: ${{ matrix.os == 'ubuntu-latest' && '2014' || 'off' }}
       - name: Upload wheels
         uses: actions/upload-artifact@v4
@@ -103,9 +100,10 @@ jobs:
           skip-existing: true
       - name: Verify PyPI upload
         run: |
-          pip install twine
-          twine check dist/*.whl dist/*.tar.gz
+          pip install twine jq
+          twine check dist/*.whl dist*.tar.gz
           curl -s https://pypi.org/pypi/cstgs/${{ github.ref_name }}/json | jq '.files[] | .filename'
+
   create_github_release:
     name: Create GitHub Release
     needs: [build_wheels, build_sdist]
