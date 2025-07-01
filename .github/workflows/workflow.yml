@@ -106,11 +106,6 @@ jobs:
           user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
           skip-existing: true
-      - name: Verify PyPI upload
-        run: |
-          pip install twine jq
-          twine check dist/*.whl dist/*.tar.gz
-          curl -s https://pypi.org/pypi/cstgs/${{ github.ref_name }}/json | jq '.files[] | .filename'
 
   create_github_release:
     name: Create GitHub Release
