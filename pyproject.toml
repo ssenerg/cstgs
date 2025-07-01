@@ -1,6 +1,6 @@
 [project]
 name = "cstgs"
-version = "0.1.4"
+version = "0.1.5"
 requires-python = ">=3.9,<4.0"
 
 [build-system]
