@@ -1,6 +1,6 @@
 [package]
 name = "cstgs"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2024"
 authors = ["Amir Hossein Pakdaman"]
 description = "Counting and Sampling Triangles from a Graph Stream, with Python bindings"
