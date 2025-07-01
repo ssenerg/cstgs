@@ -304,3 +304,12 @@
 │ Reddit::soc-redditHyperlinks-b… ┆ 5800025   ┆ 406391           ┆ 16.55s       │
 └─────────────────────────────────┴───────────┴──────────────────┴──────────────┘
 ```
+
+---
+
+### Used data is accessible via these links
+```
+https://snap.stanford.edu/data/as-Caida.html
+https://snap.stanford.edu/data/soc-RedditHyperlinks.html
+https://snap.stanford.edu/data/Oregon-1.html
+```
