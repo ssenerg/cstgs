@@ -92,6 +92,14 @@ jobs:
       - name: Log artifact structure
         run: |
           find dist -type f -ls
+      - name: Consolidate artifacts
+        run: |
+          mkdir -p dist_temp
+          find dist -name '*.whl' -exec mv {} dist_temp/ \;
+          find dist -name '*.tar.gz' -exec mv {} dist_temp/ \;
+          rm -rf dist
+          mv dist_temp dist
+          ls -l dist
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
@@ -101,7 +109,7 @@ jobs:
       - name: Verify PyPI upload
         run: |
           pip install twine jq
-          twine check dist/*.whl dist*.tar.gz
+          twine check dist/*.whl dist/*.tar.gz
           curl -s https://pypi.org/pypi/cstgs/${{ github.ref_name }}/json | jq '.files[] | .filename'
 
   create_github_release:
