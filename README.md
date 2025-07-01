@@ -5,7 +5,150 @@
 
 ---
 
-## Results ( 12 processors )
+## Results 
+### 64 Processors
+```
+┌─────────────────────────────────┬───────────┬──────────────┐
+│ dataset                         ┆ triangles ┆ process_took │
+│ ---                             ┆ ---       ┆ ---          │
+│ str                             ┆ i64       ┆ str          │
+╞═════════════════════════════════╪═══════════╪══════════════╡
+│ Oregon-1::oregon1_010421.tsv    ┆ 56        ┆ 33.60ms      │
+│ Oregon-1::oregon1_010505.tsv    ┆ 48        ┆ 43.30ms      │
+│ Oregon-1::oregon1_010526.tsv    ┆ 57        ┆ 64.98ms      │
+│ Oregon-1::oregon1_010407.tsv    ┆ 29        ┆ 65.96ms      │
+│ Oregon-1::oregon1_010428.tsv    ┆ 36        ┆ 76.21ms      │
+│ Oregon-1::oregon1_010331.tsv    ┆ 47        ┆ 78.15ms      │
+│ Oregon-1::oregon1_010414.tsv    ┆ 56        ┆ 78.56ms      │
+│ Oregon-1::oregon1_010512.tsv    ┆ 48        ┆ 80.28ms      │
+│ Oregon-1::oregon1_010519.tsv    ┆ 39        ┆ 80.74ms      │
+│ Caida::as-caida20070917.tsv     ┆ 65        ┆ 84.65ms      │
+│ Caida::as-caida20040202.tsv     ┆ 111       ┆ 126.77ms     │
+│ Caida::as-caida20040503.tsv     ┆ 114       ┆ 133.84ms     │
+│ Caida::as-caida20040607.tsv     ┆ 111       ┆ 138.63ms     │
+│ Reddit::soc-redditHyperlinks-b… ┆ 17460     ┆ 145.43ms     │
+│ Caida::as-caida20060313.tsv     ┆ 138       ┆ 150.39ms     │
+│ Caida::as-caida20050704.tsv     ┆ 130       ┆ 150.56ms     │
+│ Caida::as-caida20050207.tsv     ┆ 81        ┆ 151.37ms     │
+│ Caida::as-caida20070716.tsv     ┆ 176       ┆ 152.70ms     │
+│ Caida::as-caida20040405.tsv     ┆ 104       ┆ 161.43ms     │
+│ Caida::as-caida20040105.tsv     ┆ 58        ┆ 164.59ms     │
+│ Caida::as-caida20070212.tsv     ┆ 220       ┆ 175.15ms     │
+│ Caida::as-caida20060116.tsv     ┆ 148       ┆ 182.92ms     │
+│ Caida::as-caida20050307.tsv     ┆ 81        ┆ 187.89ms     │
+│ Caida::as-caida20060508.tsv     ┆ 207       ┆ 191.24ms     │
+│ Caida::as-caida20040301.tsv     ┆ 70        ┆ 194.06ms     │
+│ Caida::as-caida20050404.tsv     ┆ 120       ┆ 195.29ms     │
+│ Caida::as-caida20060327.tsv     ┆ 182       ┆ 196.45ms     │
+│ Caida::as-caida20060403.tsv     ┆ 189       ┆ 196.47ms     │
+│ Caida::as-caida20050801.tsv     ┆ 119       ┆ 196.62ms     │
+│ Caida::as-caida20040906.tsv     ┆ 195       ┆ 197.47ms     │
+│ Caida::as-caida20040802.tsv     ┆ 89        ┆ 202.06ms     │
+│ Caida::as-caida20061211.tsv     ┆ 163       ┆ 202.38ms     │
+│ Caida::as-caida20070108.tsv     ┆ 156       ┆ 205.16ms     │
+│ Caida::as-caida20041101.tsv     ┆ 123       ┆ 205.85ms     │
+│ Caida::as-caida20061016.tsv     ┆ 164       ┆ 212.41ms     │
+│ Caida::as-caida20060220.tsv     ┆ 153       ┆ 213.78ms     │
+│ Caida::as-caida20060710.tsv     ┆ 163       ┆ 214.82ms     │
+│ Caida::as-caida20060501.tsv     ┆ 215       ┆ 217.63ms     │
+│ Caida::as-caida20070129.tsv     ┆ 190       ┆ 218.62ms     │
+│ Caida::as-caida20051107.tsv     ┆ 158       ┆ 223.62ms     │
+│ Caida::as-caida20050606.tsv     ┆ 114       ┆ 227.72ms     │
+│ Caida::as-caida20060227.tsv     ┆ 158       ┆ 228.09ms     │
+│ Caida::as-caida20060731.tsv     ┆ 113       ┆ 234.79ms     │
+│ Caida::as-caida20060206.tsv     ┆ 130       ┆ 241.67ms     │
+│ Caida::as-caida20060717.tsv     ┆ 145       ┆ 242.11ms     │
+│ Caida::as-caida20050103.tsv     ┆ 82        ┆ 243.10ms     │
+│ Caida::as-caida20060123.tsv     ┆ 72        ┆ 247.41ms     │
+│ Caida::as-caida20061113.tsv     ┆ 22        ┆ 248.08ms     │
+│ Caida::as-caida20041206.tsv     ┆ 130       ┆ 248.53ms     │
+│ Caida::as-caida20060522.tsv     ┆ 218       ┆ 249.20ms     │
+│ Caida::as-caida20060410.tsv     ┆ 106       ┆ 249.89ms     │
+│ Caida::as-caida20060130.tsv     ┆ 160       ┆ 250.17ms     │
+│ Caida::as-caida20060306.tsv     ┆ 168       ┆ 251.48ms     │
+│ Caida::as-caida20070813.tsv     ┆ 125       ┆ 253.41ms     │
+│ Caida::as-caida20051003.tsv     ┆ 111       ┆ 255.60ms     │
+│ Caida::as-caida20060724.tsv     ┆ 187       ┆ 258.14ms     │
+│ Caida::as-caida20060814.tsv     ┆ 177       ┆ 260.00ms     │
+│ Caida::as-caida20060109.tsv     ┆ 120       ┆ 260.27ms     │
+│ Caida::as-caida20070521.tsv     ┆ 148       ┆ 261.80ms     │
+│ Caida::as-caida20060807.tsv     ┆ 135       ┆ 262.72ms     │
+│ Caida::as-caida20061002.tsv     ┆ 147       ┆ 264.33ms     │
+│ Caida::as-caida20070115.tsv     ┆ 156       ┆ 266.50ms     │
+│ Caida::as-caida20060102.tsv     ┆ 107       ┆ 270.38ms     │
+│ Caida::as-caida20061225.tsv     ┆ 204       ┆ 276.06ms     │
+│ Caida::as-caida20070219.tsv     ┆ 138       ┆ 276.92ms     │
+│ Caida::as-caida20070409.tsv     ┆ 187       ┆ 283.73ms     │
+│ Caida::as-caida20070416.tsv     ┆ 187       ┆ 284.09ms     │
+│ Caida::as-caida20061030.tsv     ┆ 186       ┆ 285.96ms     │
+│ Caida::as-caida20041004.tsv     ┆ 144       ┆ 287.17ms     │
+│ Caida::as-caida20060529.tsv     ┆ 122       ┆ 287.51ms     │
+│ Caida::as-caida20040705.tsv     ┆ 102       ┆ 288.46ms     │
+│ Caida::as-caida20061106.tsv     ┆ 99        ┆ 288.62ms     │
+│ Caida::as-caida20060213.tsv     ┆ 148       ┆ 292.63ms     │
+│ Caida::as-caida20060703.tsv     ┆ 154       ┆ 295.57ms     │
+│ Caida::as-caida20070122.tsv     ┆ 177       ┆ 296.96ms     │
+│ Caida::as-caida20070514.tsv     ┆ 229       ┆ 297.73ms     │
+│ Caida::as-caida20060605.tsv     ┆ 217       ┆ 298.77ms     │
+│ Caida::as-caida20060821.tsv     ┆ 177       ┆ 301.13ms     │
+│ Caida::as-caida20050905.tsv     ┆ 118       ┆ 302.73ms     │
+│ Caida::as-caida20060619.tsv     ┆ 179       ┆ 304.70ms     │
+│ Caida::as-caida20061023.tsv     ┆ 160       ┆ 305.06ms     │
+│ Caida::as-caida20070709.tsv     ┆ 125       ┆ 305.69ms     │
+│ Caida::as-caida20071022.tsv     ┆ 176       ┆ 306.48ms     │
+│ Caida::as-caida20060918.tsv     ┆ 219       ┆ 306.86ms     │
+│ Caida::as-caida20070618.tsv     ┆ 145       ┆ 308.67ms     │
+│ Caida::as-caida20070604.tsv     ┆ 163       ┆ 309.57ms     │
+│ Caida::as-caida20070820.tsv     ┆ 156       ┆ 309.80ms     │
+│ Caida::as-caida20060612.tsv     ┆ 198       ┆ 310.04ms     │
+│ Caida::as-caida20060925.tsv     ┆ 189       ┆ 310.77ms     │
+│ Caida::as-caida20060626.tsv     ┆ 173       ┆ 311.92ms     │
+│ Caida::as-caida20071001.tsv     ┆ 153       ┆ 313.25ms     │
+│ Caida::as-caida20070312.tsv     ┆ 178       ┆ 314.70ms     │
+│ Caida::as-caida20070806.tsv     ┆ 172       ┆ 318.49ms     │
+│ Caida::as-caida20071105.tsv     ┆ 177       ┆ 319.85ms     │
+│ Caida::as-caida20060424.tsv     ┆ 184       ┆ 320.42ms     │
+│ Caida::as-caida20070528.tsv     ┆ 140       ┆ 323.31ms     │
+│ Caida::as-caida20070430.tsv     ┆ 216       ┆ 324.31ms     │
+│ Caida::as-caida20061204.tsv     ┆ 145       ┆ 325.98ms     │
+│ Caida::as-caida20070305.tsv     ┆ 161       ┆ 327.21ms     │
+│ Caida::as-caida20070730.tsv     ┆ 171       ┆ 330.43ms     │
+│ Caida::as-caida20060320.tsv     ┆ 136       ┆ 330.78ms     │
+│ Caida::as-caida20070205.tsv     ┆ 156       ┆ 331.79ms     │
+│ Caida::as-caida20060911.tsv     ┆ 154       ┆ 335.42ms     │
+│ Reddit::soc-redditHyperlinks-t… ┆ 53501     ┆ 336.73ms     │
+│ Caida::as-caida20060828.tsv     ┆ 179       ┆ 336.99ms     │
+│ Caida::as-caida20060515.tsv     ┆ 192       ┆ 337.85ms     │
+│ Caida::as-caida20070101.tsv     ┆ 174       ┆ 338.84ms     │
+│ Caida::as-caida20061009.tsv     ┆ 186       ┆ 339.46ms     │
+│ Caida::as-caida20071029.tsv     ┆ 191       ┆ 344.95ms     │
+│ Caida::as-caida20050502.tsv     ┆ 146       ┆ 348.23ms     │
+│ Caida::as-caida20070402.tsv     ┆ 180       ┆ 349.87ms     │
+│ Caida::as-caida20060417.tsv     ┆ 168       ┆ 351.40ms     │
+│ Caida::as-caida20071015.tsv     ┆ 152       ┆ 352.32ms     │
+│ Caida::as-caida20051205.tsv     ┆ 163       ┆ 353.05ms     │
+│ Caida::as-caida20070611.tsv     ┆ 175       ┆ 354.28ms     │
+│ Caida::as-caida20070827.tsv     ┆ 180       ┆ 355.60ms     │
+│ Caida::as-caida20061120.tsv     ┆ 144       ┆ 365.43ms     │
+│ Caida::as-caida20061127.tsv     ┆ 176       ┆ 370.42ms     │
+│ Caida::as-caida20070319.tsv     ┆ 203       ┆ 371.66ms     │
+│ Caida::as-caida20070507.tsv     ┆ 170       ┆ 371.91ms     │
+│ Caida::as-caida20071008.tsv     ┆ 173       ┆ 372.96ms     │
+│ Caida::as-caida20071112.tsv     ┆ 130       ┆ 376.21ms     │
+│ Caida::as-caida20070226.tsv     ┆ 173       ┆ 376.60ms     │
+│ Caida::as-caida20070702.tsv     ┆ 176       ┆ 376.61ms     │
+│ Caida::as-caida20060904.tsv     ┆ 174       ┆ 381.28ms     │
+│ Caida::as-caida20070924.tsv     ┆ 160       ┆ 387.30ms     │
+│ Caida::as-caida20070910.tsv     ┆ 181       ┆ 389.14ms     │
+│ Caida::as-caida20070723.tsv     ┆ 193       ┆ 390.89ms     │
+│ Caida::as-caida20070625.tsv     ┆ 142       ┆ 413.54ms     │
+│ Caida::as-caida20061218.tsv     ┆ 131       ┆ 433.23ms     │
+│ Caida::as-caida20070423.tsv     ┆ 160       ┆ 436.45ms     │
+│ Caida::as-caida20070903.tsv     ┆ 186       ┆ 456.83ms     │
+│ Caida::as-caida20070326.tsv     ┆ 178       ┆ 461.07ms     │
+└─────────────────────────────────┴───────────┴──────────────┘ 
+```
+### 12 Processors
 ```
 ┌─────────────────────────────────┬───────────┬──────────────┐
 │ dataset                         ┆ triangles ┆ process_took │
@@ -146,4 +289,18 @@
 │ Caida::as-caida20071022.tsv     ┆ 3745      ┆ 1.28s        │
 │ Reddit::soc-redditHyperlinks-t… ┆ 2368752   ┆ 2.34s        │
 └─────────────────────────────────┴───────────┴──────────────┘
+```
+### 2 Processors - Best results
+```
+
+┌─────────────────────────────────┬───────────┬──────────────────┬──────────────┐
+│ dataset                         ┆ triangles ┆ actual_triangles ┆ process_took │
+│ ---      -e = 0.8 , -w = 1.0    ┆ ---       ┆ ---              ┆ ---          │
+│ str                             ┆ i64       ┆ i64              ┆ str          │
+╞═════════════════════════════════╪═══════════╪══════════════════╪══════════════╡
+│ Oregon-1::oregon1_010331.tsv    ┆ 5679      ┆ 17144            ┆ 671.30ms     │
+│ Caida::as-caida20060102.tsv     ┆ 39288     ┆ 30433            ┆ 4.11s        │
+│ Caida::as-caida20070101.tsv     ┆ 52210     ┆ 40475            ┆ 5.40s        │
+│ Reddit::soc-redditHyperlinks-b… ┆ 5800025   ┆ 406391           ┆ 16.55s       │
+└─────────────────────────────────┴───────────┴──────────────────┴──────────────┘
 ```
