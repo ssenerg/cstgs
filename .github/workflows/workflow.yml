@@ -79,7 +79,7 @@ jobs:
     needs: build_wheels
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
-    permissions:  # Add this section
+    permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
@@ -88,13 +88,22 @@ jobs:
         with:
           path: dist
           pattern: wheels-*
+      - name: Deduplicate wheels
+        run: |
+          mkdir -p release_wheels
+          find dist -name '*.whl' -exec mv {} release_wheels/ \; || true
+          # Remove duplicates by keeping only the first occurrence of each unique filename
+          ls release_wheels | sort | uniq | while read -r file; do
+            find release_wheels -name "$file" -maxdepth 1 | tail -n +2 | xargs -r rm -v
+          done
+          ls -l release_wheels
       - name: Verify wheels
         run: |
-          find dist -name '*.whl' | grep . || { echo "No wheels found!"; exit 1; }
+          ls release_wheels/*.whl | grep . || { echo "No wheels found!"; exit 1; }
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/**/*.whl
+          files: release_wheels/*.whl
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body: |
@@ -102,5 +111,6 @@ jobs:
             See the [changelog](CHANGELOG.md) for details.
           draft: false
           prerelease: false
+          fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
