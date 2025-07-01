@@ -74,6 +74,7 @@ jobs:
         run: |
           pip install maturin
           find dist -name '*.whl' -exec maturin publish --skip-existing -u __token__ -p $PYPI_TOKEN --no-sdist {} \;
+
   create_github_release:
     name: Create GitHub Release
     needs: build_wheels
@@ -88,13 +89,15 @@ jobs:
         with:
           path: dist
           pattern: wheels-*
+      - name: Log artifact structure
+        run: |
+          find dist -type f -ls
       - name: Deduplicate wheels
         run: |
           mkdir -p release_wheels
-          find dist -name '*.whl' -exec mv {} release_wheels/ \; || true
-          # Remove duplicates by keeping only the first occurrence of each unique filename
-          ls release_wheels | sort | uniq | while read -r file; do
-            find release_wheels -name "$file" -maxdepth 1 | tail -n +2 | xargs -r rm -v
+          # Move wheels to release_wheels, keeping only the first occurrence of each unique filename
+          find dist -name '*.whl' -exec basename {} \; | sort -u | while read -r file; do
+            find dist -name "$file" -exec mv {} release_wheels/ \; -quit
           done
           ls -l release_wheels
       - name: Verify wheels
