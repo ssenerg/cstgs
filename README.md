@@ -312,6 +312,19 @@
 ```
 ---
 
+### How to use
+
+```py
+from cstgs import number_of_triangles
+number_of_triangles(
+    "data.tsv", # str:    data file address
+    12,         # int:    number of processors
+    0.8,        # float:  edge sampling probability
+    1.0         # float:  wedge sampling probability
+)               # -> int: number of triangles)
+```
+---
+
 ### Notes
 
 - Increasing processor numbers means **less triangles count** and **less runtime**.
